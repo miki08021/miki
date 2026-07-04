@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语微课：定冠词 The 的用法</title>
+    <style>
+        :root {
+            /* 马卡龙童趣配色 */
+            --primary-color: #73a8ff;
+            --primary-light: #b8d4ff;
+            --secondary-color: #fff6e8;
+            --text-color: #333;
+            --accent-color: #ff7b9c;
+            --success-color: #66d2a0;
+            --success-light: #c6f2e0;
+            --warning-color: #ffd384;
+            --wrong-color: #ff94a9;
+            --wrong-light: #ffe0e6;
+            --border-radius: 14px;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #fef9f3 0%, #eef7ff 100%);
+            margin: 0;
+            padding: 24px 16px;
+        }
+
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px 32px;
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(115, 168, 255, 0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #407bd8;
+            border-bottom: 3px solid var(--primary-light);
+            padding-bottom: 22px;
+            font-size: 2.2rem;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-top: 48px;
+            display: flex;
+            align-items: center;
+            font-size: 1.6rem;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 28px;
+            background: linear-gradient(180deg, var(--primary-color), #92c0ff);
+            margin-right: 12px;
+            border-radius: 4px;
+        }
+
+        h3 {
+            font-size: 1.35rem;
+            margin: 32px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* 知识点卡片美化 */
+        .rule-card {
+            background: var(--secondary-color);
+            border-left: 6px solid var(--primary-color);
+            padding: 20px 24px;
+            margin-bottom: 24px;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s ease;
+        }
+        .rule-card:hover {
+            transform: translateX(4px);
+        }
+
+        .rule-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-box {
+            background: #fff;
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-top: 12px;
+            font-style: italic;
+            color: #555;
+            border: 1.5px dashed var(--primary-light);
+        }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* 题目区域 */
+        .question-item {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 14px;
+            line-height: 1.8;
+        }
+
+        /* 可爱选项按钮核心升级 */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 14px;
+            margin-top: 12px;
+        }
+
+        .option-btn {
+            padding: 12px 16px;
+            border: 2px solid #e1eaff;
+            background: linear-gradient(145deg, #ffffff, #f7fbff);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: center;
+            font-size: 1.05rem;
+            box-shadow: 0 3px 8px rgba(115, 168, 255, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        .option-btn::before {
+            content: '✨';
+            position: absolute;
+            left: 10px;
+            opacity: 0.4;
+            transition: 0.2s;
+        }
+        .option-btn:hover {
+            background: linear-gradient(145deg, #e6f0ff, #d0e2ff);
+            border-color: var(--primary-color);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 14px rgba(115, 168, 255, 0.18);
+        }
+        .option-btn:hover::before {
+            opacity: 1;
+            scale: 1.15;
+        }
+
+        /* 答题状态配色（柔和不刺眼） */
+        .option-btn.selected {}
+        .option-btn.correct {
+            background: linear-gradient(145deg, var(--success-color), #86e0b6);
+            color: #fff;
+            border-color: #4fc490;
+            box-shadow: 0 0 12px rgba(102, 210, 160, 0.35);
+        }
+        .option-btn.wrong {
+            background: linear-gradient(145deg, var(--wrong-color), #ffb1c2);
+            color: #fff;
+            border-color: #ff6b87;
+        }
+
+        /* 答案折叠面板 */
+        .reveal-container {
+            margin-top: 14px;
+        }
+
+        details {
+            background-color: #f8fbff;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            border: 1px solid var(--primary-light);
+        }
+
+        summary {
+            padding: 14px 18px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary-color);
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.05rem;
+        }
+
+        summary::-webkit-details-marker {
+            display: none;
+        }
+
+        summary::after {
+            content: '+';
+            font-size: 1.4em;
+            font-weight: bold;
+            width: 26px;
+            height: 26px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        details[open] summary::after {
+            content: '-';
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #e1eaff;
+        }
+
+        .answer-content {
+            padding: 18px;
+            font-size: 1em;
+            color: #444;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .answer-key {
+            font-weight: bold;
+            color: var(--success-color);
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 小贴士面板 */
+        .tips-box {
+            background: linear-gradient(145deg, #fff9e0, #fff0bc);
+            border: 1px solid #ffdd88;
+            color: #805c00;
+            padding: 20px 24px;
+            border-radius: var(--border-radius);
+            margin-top: 36px;
+            box-shadow: var(--card-shadow);
+        }
+        .tips-box strong {
+            font-size: 1.15rem;
+        }
+
+        /* 弹窗星星/哭脸动画 */
+        .feedback-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 6rem;
+            pointer-events: none;
+            z-index: 9999;
+            animation: popAnim 1.2s ease-out forwards;
+        }
+        @keyframes popAnim {
+            0% { scale: 0.3; opacity: 0; }
+            30% { scale: 1.3; opacity: 1; }
+            70% { scale: 1; opacity: 1; }
+            100% { scale: 0.8; opacity: 0; transform: translate(-50%, -80%); }
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 24px 16px;
+            }
+            h1 {
+                font-size: 1.7rem;
+            }
+            .options-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .option-btn {
+                padding: 10px;
+                font-size: 1rem;
+            }
+            .feedback-popup {
+                font-size: 4.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📚 英语微课：定冠词 The 的六大黄金法则</h1>
+
+    <!-- Part 1: Learn -->
+    <section id="learn">
+        <h2>Part 1: 核心考点精讲 (Learn)</h2>
+        
+        <div class="rule-card">
+            <div class="rule-title">1️⃣ 特指与再次提及</div>
+            <p>指说话双方都知道的人或物；或者上文已经提到过，下文再次提到时。</p>
+            <div class="example-box">
+                > Look at <span class="highlight">the</span> blackboard, Lily.<br>
+                <small>解析：教室里的黑板是双方都知道的特定物体。</small>
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-title">2️⃣ 独一无二的事物</div>
+            <p>用于世界上独一无二的事物名词前。</p>
+            <p><strong>常见词汇：</strong>sun, moon, earth, sky, world</p>
+            <div class="example-box">
+                > <span class="highlight">The</span> sun was just setting.<br>
+                <small>解析：太阳是独一无二的。</small>
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-title">3️⃣ “一类人/物”的代表</div>
+            <p><strong>Rule A:</strong> The + 单数可数名词 (表类别)<br>
+            <strong>Rule B:</strong> The + 形容词 (表一类人，如 the old, the rich)</p>
+            <div class="example-box">
+                > We should take good care of <span class="highlight">the</span> old.<br>
+                <small>解析：the old 指代“老年人”这一群体。</small>
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-title">4️⃣ 最高级与序数词</div>
+            <p>形容词最高级前、序数词前通常加 the。</p>
+            <div class="example-box">
+                > He is <span class="highlight">the</span> tallest man in our class.<br>
+                > I didn’t take <span class="highlight">the</span> first bus.
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-title">5️⃣ 乐器演奏</div>
+            <p><strong>Play + the + 乐器</strong> (对比：Play + 球类/棋类 不加the)</p>
+            <div class="example-box">
+                > Daming is playing <span class="highlight">the</span> suona...<br>
+                > I play <span class="highlight">the</span> electric guitar...
+            </div>
+        </div>
+
+        <div class="rule-card">
+            <div class="rule-title">6️⃣ 固定短语搭配</div>
+            <p>需记忆的习惯用法。</p>
+            <div class="example-box">
+                on <span class="highlight">the</span> right | all <span class="highlight">the</span> time | by <span class="highlight">the</span> way | in <span class="highlight">the</span> middle of
+            </div>
+        </div>
+    </section>
+
+    <!-- Part 2: Practice -->
+    <section id="practice">
+        <h2>Part 2: 实战演练 (Practice)</h2>
+        <p style="color: #666; font-size: 0.95em;">💡 提示：填空题点击灰色折叠框查看解析；选择题点击按钮答题，答对弹出星星✨，答错弹出哭脸😢</p>
+
+        <!-- Module 1: Fill in blanks -->
+        <h3>🟢 模块一：冠词填空</h3>
+        
+        <div class="question-item">
+            <div class="question-text">1. ______ Great Wall is ______ longest wall all over the world.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: The; the</span>
+                        <p><strong>解析：</strong>Great Wall（长城）是专有名词且独一无二，用 The；longest 是最高级，用 the。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">2. I like playing ______ piano. But my brother likes playing ______ football.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: the; /</span>
+                        <p><strong>解析：</strong>play the piano（乐器加the）；play football（球类运动不加冠词）。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">3. On ______ Children’s Day ______ children in our school are very happy.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: /; the</span>
+                        <p><strong>解析：</strong>节日名称前通常不加冠词；后半句特指“我们学校的孩子们”，用 the。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">4. Look! There’s ______ apple tree. ______ tree is tall.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: an; The</span>
+                        <p><strong>解析：</strong>第一次提到苹果树，apple 元音开头用 an；第二次提到这棵树，特指用 The。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">5. Can you see ______ moon?</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: the</span>
+                        <p><strong>解析：</strong>moon（月亮）是独一无二天体，用 the。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">6. Don’t run in ______ classroom.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: the</span>
+                        <p><strong>解析：</strong>特指说话人所在的这间教室，双方皆知，用 the。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">7. The apple on ______ table is for Grandma. It is sweet.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: the</span>
+                        <p><strong>解析：</strong>特指桌子上的那个苹果，隐含“那张桌子”，用 the。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">8. It’s sunny today and ______ sun is high in ______ sky.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: the; the</span>
+                        <p><strong>解析：</strong>sun 和 sky 均为独一无二或语境中特指，均用 the。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">9. We must protect ______ earth because it is our home.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: the</span>
+                        <p><strong>解析：</strong>earth（地球）是独一无二天体，用 the。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">10. My brother is ______ boy in a red shirt.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: a</span>
+                        <p><strong>解析：</strong>此处侧重介绍身份“他是一个穿红衬衫的男孩”，故用 a。（注：若强调特指某人已知的男孩，语境不同可能用 the，但依本题常规考点为泛指身份）。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">11. Father’s Day is on ______ third Sunday of June.</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: the</span>
+                        <p><strong>解析：</strong>third 是序数词，前面加 the。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item">
+            <div class="question-text">12. Do you like playing ______ guitar?</div>
+            <div class="reveal-container">
+                <details>
+                    <summary>点击查看答案与解析</summary>
+                    <div class="answer-content">
+                        <span class="answer-key">答案: the</span>
+                        <p><strong>解析：</strong>guitar 是乐器，play the guitar。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- Module 2: Multiple Choice -->
+        <h3>🔵 模块二：单项选择</h3>
+
+        <div class="question-item" id="mc-1">
+            <div class="question-text">1. They live in ______ old house near ______ station.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, false)">A. a; the</button>
+                <button class="option-btn" onclick="checkAnswer(this, true)">B. an; the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">C. an; an</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">D. an; /</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>old 以元音音素开头，用 <strong>an</strong> house；station 是双方已知的地点或特指附近的火车站，用 <strong>the</strong>。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-2">
+            <div class="question-text">2. He was ______ first to come.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, false)">A. an</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">B. a</button>
+                <button class="option-btn" onclick="checkAnswer(this, true)">C. the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">D. /</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>first 是序数词，前面加 <strong>the</strong>。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-3">
+            <div class="question-text">3. Mr Black goes to ______ Australia once ______ year.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, false)">A. a; a</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">B. a; the</button>
+                <button class="option-btn" onclick="checkAnswer(this, true)">C. /; a</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">D. an; the</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>Australia 是国家名，前不加冠词（<strong>/</strong>）；once a year 是固定搭配，表示“每年一次”，用 <strong>a</strong>。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-4">
+            <div class="question-text">4. English is ______ useful language in ______ world.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, true)">A. a; the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">B. an; the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">C. the; /</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">D. /; the</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>useful 虽以元音字母u开头，但发音是 /j/ (辅音音素)，所以用 <strong>a</strong>；world 是独一无二的环境概念，用 <strong>the</strong>。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-5">
+            <div class="question-text">5. The shop is at ______ second crossing and I’ll go there by ______ bike.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, false)">A. a; a</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">B. the; the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">C. the; a</button>
+                <button class="option-btn" onclick="checkAnswer(this, true)">D. the; /</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>second 是序数词，用 <strong>the</strong>；by bike 是交通方式固定搭配，零冠词（<strong>/</strong>）。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-6">
+            <div class="question-text">6. We will go to ______ cinema this evening.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, true)">A. the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">B. /</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">C. a</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">D. an</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>go to the cinema 是固定搭配，表示“去看电影”。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-7">
+            <div class="question-text">7. He’s standing on ______ other side of ______ river.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, false)">A. a; a</button>
+                <button class="option-btn" onclick="checkAnswer(this, true)">B. the; the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">C. the; an</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">D. a; the</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>on the other side 是固定搭配（在另一边）；river 在此处特指那条河，用 <strong>the</strong>。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-8">
+            <div class="question-text">8. —Where’s ______ desk?<br>—It’s in ______ middle of the room.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, false)">A. the; /</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">B. /; the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">C. /; /</button>
+                <button class="option-btn" onclick="checkAnswer(this, true)">D. the; the</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>问话特指“那张书桌”，用 <strong>the</strong>；in the middle of 是固定搭配，用 <strong>the</strong>。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-9">
+            <div class="question-text">9. He died in ______ autumn of 1989.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, false)">A. /</button>
+                <button class="option-btn" onclick="checkAnswer(this, true)">B. the</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">C. a</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">D. an</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>季节前通常不加冠词，但当季节被具体年份修饰特指某一年的秋天时，要加 <strong>the</strong> (in the autumn of 1989)。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="question-item" id="mc-10">
+            <div class="question-text">10. There is ______ old bike. ______ old bike is Miss Fang’s.</div>
+            <div class="options-grid">
+                <button class="option-btn" onclick="checkAnswer(this, true)">A. an; The</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">B. the; An</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">C. a; The</button>
+                <button class="option-btn" onclick="checkAnswer(this, false)">D. an; An</button>
+            </div>
+            <div class="reveal-container">
+                <details>
+                    <summary>查看解析</summary>
+                    <div class="answer-content">
+                        <p><strong>解析：</strong>第一次提到旧自行车，old 元音开头用 <strong>an</strong>；第二次提到这辆特定的自行车，用 <strong>The</strong>。</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="tips-box">
+        <strong>💡 学习小贴士：</strong>
+        <ul style="margin: 10px 0 0 20px; padding: 0;">
+            <li><strong>易错点：</strong>注意 <code>useful</code> (a useful book) 和 <code>hour</code> (an hour) 的区别，判断用 a 还是 an 要看<strong>发音</strong>而不是首字母。</li>
+            <li><strong>零冠词陷阱：</strong>三餐 (have breakfast)、球类 (play basketball)、交通工具 (by bus)、国家城市名 (China, Beijing) 前通常不加 the。</li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    // 弹出星星/哭脸弹窗函数
+    function showFeedback(emoji) {
+        // 清除旧弹窗
+        const oldPop = document.querySelector('.feedback-popup');
+        if(oldPop) oldPop.remove();
+        // 创建弹窗
+        const pop = document.createElement('div');
+        pop.className = 'feedback-popup';
+        pop.innerText = emoji;
+        document.body.appendChild(pop);
+        // 动画结束自动删除
+        setTimeout(()=> pop.remove(), 1200);
+    }
+
+    function checkAnswer(btn, isCorrect) {
+        // 获取父容器
+        const parent = btn.parentElement;
+        const buttons = parent.getElementsByClassName('option-btn');
+        
+        // 重置所有按钮状态
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('selected', 'correct', 'wrong');
+            buttons[i].disabled = true; // 锁定选项，防止重复点击
+        }
+
+        // 设置当前点击按钮的状态 + 弹出动画
+        if (isCorrect) {
+            btn.classList.add('correct');
+            showFeedback('✨⭐✨');
+        } else {
+            btn.classList.add('wrong');
+            showFeedback('😢🥺😢');
+        }
+    }
+</script>
+
+</body>
+</html>
